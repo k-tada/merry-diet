@@ -1,0 +1,27 @@
+- name: check nodebrew is already installed
+  shell: which nodebrew
+  register: which_nodebrew
+  failed_when: which_nodebrew.rc not in [0, 1]
+
+- name: install nodebrew
+  shell: curl -L git.io/nodebrew | perl - setup
+  when: which_nodebrew.rc == 1
+
+- name: bashrc edit
+  lineinfile: >
+    dest=~/.bashrc
+    line="export PATH=$HOME/.nodebrew/current/bin:$PATH"
+  when: which_nodebrew.rc == 1
+
+- name: source bashrc
+  shell: source ~/.bashrc chdir=~/
+  when: which_nodebrew.rc == 1
+
+- name: install node
+  shell: nodebrew install-binary {{ node_version }}
+  when: which_nodebrew.rc == 1
+
+- name: use node
+  shell: nodebrew use {{ node_version }}
+  ignore_errors: yes
+  when: which_nodebrew.rc == 1

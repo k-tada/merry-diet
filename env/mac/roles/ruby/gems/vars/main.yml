@@ -1,0 +1,5 @@
+install_gems:
+  - bundler
+  - rails
+  - sqlite3
+

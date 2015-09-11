@@ -1,0 +1,5 @@
+---
+- name: update yum
+  sudo: true
+  # yum: name=* state=latest
+  shell: yum update -y

@@ -1,0 +1,7 @@
+- name: npm | self update
+  shell: npm install -g npm
+
+- name: npm | install npms
+  shell: npm install -g {{ item }}
+  with_items:
+    - "{{ install_npms }}"
