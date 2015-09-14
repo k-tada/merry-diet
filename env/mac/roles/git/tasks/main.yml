@@ -1,0 +1,21 @@
+- name: remove git
+  sudo: true
+  yum: name=git state=absent
+
+- name: install requires
+  sudo: true
+  yum: name={{ item }} state=present
+  with_items: git_requires
+
+- name: download newest git tarball
+  sudo: true
+  shell: wget https://www.kernel.org/pub/software/scm/git/{{ git_filename }} chdir=/usr/local/src
+
+- name: extract tarball
+  sudo: true
+  shell: tar xzvf {{ git_filename }} chdir=/usr/local/src
+
+- name: install git
+  sudo: true
+  shell: make prefix=/usr/local all && make prefix=/usr/local install chdir=/usr/local/src/git-{{ git_version }}
+

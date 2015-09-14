@@ -1,0 +1,10 @@
+git_version: 2.5.2
+git_filename: git-{{ git_version }}.tar.gz
+git_requires:
+  - curl-devel
+  - wget
+  - expat-devel
+  - gettext-devel
+  - openssl-devel
+  - zlib-devel
+  - perl-ExtUtils-MakeMaker

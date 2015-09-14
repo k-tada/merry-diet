@@ -41,6 +41,3 @@ rails -v
 node -v
 npm -v
 ```
-
-
-テスト
