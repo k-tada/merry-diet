@@ -1,0 +1,10 @@
+- name: gems | install rubygems-update
+  shell: gem install rubygems-update
+
+- name: gems | update rubygems
+  shell: update_rubygems
+
+- name: gems | install gems
+  shell: gem install {{ item }}
+  with_items:
+    - "{{ install_gems }}"

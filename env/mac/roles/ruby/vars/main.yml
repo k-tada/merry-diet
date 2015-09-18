@@ -1,0 +1,12 @@
+rbenv_root: /usr/local/rbenv
+ruby_version: 2.2.2
+ruby_requires:
+  - git
+  - tar
+  - gcc
+  - make
+  - libffi-devel
+  - zlib-devel
+  - openssl-devel
+  # - readline-devel
+  - sqlite-devel
