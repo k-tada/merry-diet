@@ -39,7 +39,7 @@ gem -v
 ### 1-2. 必要プラグインのセットアップ
 VagrantでChefを使うためにはomnibusプラグインが必要なので  
 
-`vagrant plugin install omnibus`
+`vagrant plugin install vagrant-omnibus`
 
 でインストールしましょう。
 
