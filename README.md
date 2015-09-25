@@ -21,4 +21,6 @@ bundle install --path vendor/bundle
 ※ もちろん、自分で構築しても構いません。`git`, `Ruby`, `Node.js`をインストールし、`git clone`して開発を進めてください。  
 
 
+※ 現在、2回目以降の`vagrant up`時にエラーが発生しています。原因調査中ですが、判明するまでは`vagrant destroy`して`vagrant up`で対処してください・・・非常に時間がかかりますが・・・orz
+
 

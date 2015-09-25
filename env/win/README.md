@@ -65,9 +65,16 @@ vagrant box add centos65 <ダウンロードしたBoxファイル名>
 ```
 ruby -v
 gem -v
-rails -v
 node -v
 npm -v
+```
+
+## 5. 必要なGemのインストール
+WindowsではなぜかGemのChefが動かなかった（涙）ので、自前でインストールしてください  
+```
+gem install rubygems-update
+update_rubygems
+gem install bundler
 ```
 
 
