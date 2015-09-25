@@ -37,7 +37,6 @@ vagrant box add centos65 <ダウンロードしたBoxファイル名>
 ```
 ruby -v
 gem -v
-rails -v
 node -v
 npm -v
 ```
