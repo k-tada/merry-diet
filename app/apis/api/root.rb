@@ -15,7 +15,9 @@ module API
 
     add_swagger_documentation(
       base_path: '/',
-      api_version: 'v1'
+      api_version: 'v1',
+      hide_format: true
+      # hide_documentation_path: true
     )
 
     format :json
