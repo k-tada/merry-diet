@@ -8,6 +8,16 @@ Bundler.require(*Rails.groups)
 
 module MerryDiet
   class Application < Rails::Application
+    # app/apis 以下の.rbファイルを対象に追加。
+    config.paths.add File.join('app', 'apis'), glob: File.join('**', '*.rb')
+
+    # app/apis 以下のファイルをオートロード対象に追加
+    config.autoload_paths += Dir[Rails.root.join('app', 'apis', '*')]
+
+    # JBuilder用のViewパスを追加
+    config.middleware.use(Rack::Config) do |env|
+      env['api.tilt.root'] = Rails.root.join 'app', 'views', 'apis'
+    end
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
