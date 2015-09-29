@@ -1,0 +1,6 @@
+<% if user_signed_in? %>
+  <p><%= current_user.uid %></p>
+  <p><%= current_user.provider %></p>
+  <p><%= current_user.email %></p>
+  <p><%= current_user.name %></p>
+<% end %>

@@ -1,6 +1,17 @@
 Rails.application.routes.draw do
+
+  devise_for :users, :controllers => {
+    :sessions           => 'users/sessions',
+    :registrations      => 'users/registrations',
+    :passwords          => 'users/passwords',
+    :omniauth_callbacks => 'users/omniauth_callbacks'
+  }
   mount API::Root => '/'
   mount GrapeSwaggerRails::Engine => '/docs'
+
+  get 'signin' => 'signin#index'
+  post 'signin/auth'
+  get 'about/me'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

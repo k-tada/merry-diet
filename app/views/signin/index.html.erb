@@ -1,0 +1,5 @@
+<h1>Signin#index</h1>
+<%= form_tag '/signin/auth', method: :post do %>
+  <%= text_field_tag 'space_id' %>
+  <%= submit_tag 'Sign in' %>
+<% end %>
