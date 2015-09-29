@@ -44,7 +44,8 @@ gem 'grape-swagger-rails'
 # OmniAuth
 gem 'devise'
 gem 'omniauth'
-gem 'omniauth-backlog'
+gem 'omniauth-oauth2', git: "git://github.com/k-tada/omniauth-oauth2.git"
+gem 'omniauth-backlog', git: "git://github.com/k-tada/omniauth-backlog.git"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
