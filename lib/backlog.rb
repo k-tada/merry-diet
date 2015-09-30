@@ -2,26 +2,54 @@ require 'backlog_kit'
 
 module Backlog
   class Tasks
-    def initialize(user)
-      raise 'No User Specified' if user.blank?
-      @user = user
+    def initialize(space_id, token)
+      raise 'No User Specified' if space_id.blank? || token.blank?
+      @space_id = space_id
+      @token = token
     end
 
-    def all
-      JSON.parse client.get_projects({all: true}).body.to_json
+    def proj
+      @proj ||= Proj.new(@space_id, @token)
     end
 
-    private
-    def create_client()
-      @client = BacklogKit::Client.new(
-        space_id:     @user.space_id,
+    class Proj < Tasks
+      def initialize(space_id, token)
+        super(space_id, token)
+      end
+
+      def all
+        client.get_projects({all: true}).body
+      end
+
+      def find(id)
+        client.get_project(id).body
+      end
+
+      def create(key, name, opts)
+        client.create_project(key, name, opts).body
+      end
+    end
+
+
+    protected
+    def client
+      @client ||= BacklogKit::Client.new(
+        space_id:     @space_id,
         api_key:      nil,
-        access_token: @user.token
+        access_token: @token
       )
     end
+  end
+end
 
-    def client()
-      @client || create_client
+module BacklogKit
+  class Response
+    def process(raw)
+      case raw
+      when Hash then raw.to_h
+      when Array then raw.map{|r| r.to_h}
+      else raw
+      end
     end
   end
 end

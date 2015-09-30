@@ -5,17 +5,23 @@ class TasksController < ApplicationController
   rescue_from BacklogKit::Error, with: :handle_error
 
   def index
-    @tasks = backlog.all
+    @tasks = backlog.proj.all
   end
 
   def new
+    @task = backlog.proj.create('MERRY_DIET', 'メリーさんのダイエット講座', {
+      chartEnabled: false,
+      subtaskingEnabled: false,
+      textFormattingRule: :markdown
+    })
+    redirect_to task_path({id: @task['id']})
   end
 
   def create
-
   end
 
   def show
+    @task = backlog.proj.find(params[:id])
   end
 
   def delete
@@ -23,11 +29,7 @@ class TasksController < ApplicationController
 
   private
   def backlog
-    @backlog || get_backlog
-  end
-
-  def get_backlog
-    Backlog::Tasks.new(current_user)
+    @backlog ||= Backlog::Tasks.new(current_user.space_id, current_user.token)
   end
 
   def handle_error(message = nil)
