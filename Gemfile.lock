@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/k-tada/omniauth-backlog.git
-  revision: 8ded19f19a7544c55922bda74114cc2ab06435d1
+  revision: 3c79fbe6d3427a32802ea4421e7c2cc7ed5c7aff
   specs:
     omniauth-backlog (0.2.0)
       omniauth (~> 1.2)
@@ -57,6 +57,10 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
+    backlog_kit (0.13.0)
+      activesupport (~> 4.2.1)
+      faraday (~> 0.9.1)
+      faraday_middleware (~> 0.10.0)
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -88,6 +92,8 @@ GEM
     execjs (2.6.0)
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
+    faraday_middleware (0.10.0)
+      faraday (>= 0.7.4, < 0.10)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     grape (0.13.0)
@@ -232,6 +238,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  backlog_kit
   byebug
   coffee-rails (~> 4.1.0)
   devise

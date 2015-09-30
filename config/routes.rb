@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   post 'signin/auth'
   get 'about/me'
 
+  resources :tasks, except: [:edit, :update]
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
