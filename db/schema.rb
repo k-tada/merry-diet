@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20150929050319) do
     t.string   "uid"
     t.string   "name"
     t.string   "token"
+    t.string   "space_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

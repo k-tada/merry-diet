@@ -1,6 +1,6 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def backlog
-    @user = User.find_for_backlog_oauth(request.env['omniauth.auth'], current_user)
+    @user = User.find_for_backlog_oauth(request.env['omniauth.auth'], session['omniauth.backlog.space_id'], current_user)
 
     if @user.persisted?
       sign_in_and_redirect @user, event: :authentication
