@@ -31,6 +31,8 @@ module API
         params :task do
           requires :summary, type: String, desc: 'Backlog issue title'
           requires :description, type: String, desc: 'Backlog issue description'
+          requires :issueTypeId, type: String, desc: 'Backlog issue type id'
+          requires :priorityId, type: String, desc: 'Backlog priority id'
           optional :startDate, type: String, desc: 'Backlog issue start date ex. 2015-01-01'
           optional :dueDate, type: String, desc: 'Backlog issue due date ex. 2015-01-01'
         end
@@ -68,7 +70,7 @@ module API
             use :proj
           end
           post '/' do
-            opts = proj_default_opt.merge(params.reject{|k, v| k == 'space_id' || k == 'token'})
+            opts = proj_default_opt.merge(params.reject{|k, v| %w(space_id token).include? k})
             present backlog(params).proj.create(opts.delete('key'), opts.delete('name'), opts), with: API::V1::Entities::Backlog::ProjEntity
           end
 
@@ -114,16 +116,18 @@ module API
             use :task
           end
           post '/' do
-            # opts = 
+            present backlog(params).task.create(params[:proj_id], params.reject{|k, v| %w(space_id token proj_id).include? k})
           end
         end
 
-        # ################
-        # # Other API
-        # params do
-        #   use :proj_id
-        # end
-        # resource :
+        ################
+        # Other API
+        resource :priorities do
+          desc 'GET /api/v1/backlog/priorities'
+          get '/' do
+            backlog(params).proj.priorities
+          end
+        end
       end
     end
   end

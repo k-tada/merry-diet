@@ -31,6 +31,10 @@ class Backlog
     def issue_types(id)
       client.get_issue_types(id).body
     end
+
+    def priorities
+      client.get_priorities.body
+    end
   end
 
   def task
@@ -50,8 +54,8 @@ class Backlog
       client.get_issues({:"dueDateSince" => from, :"dueDateUntil" =>to}).body
     end
 
-    def create(params)
-      client.create_issue(params.delete(:summary), params).body
+    def create(proj_id, params)
+      client.create_issue(params.delete(:summary), params.merge({projectId: proj_id})).body
     end
   end
 
