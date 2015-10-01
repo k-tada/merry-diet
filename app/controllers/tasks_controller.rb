@@ -29,7 +29,7 @@ class TasksController < ApplicationController
 
   private
   def backlog
-    @backlog ||= Backlog::Tasks.new(current_user.space_id, current_user.token)
+    @backlog ||= Backlog.new(current_user.space_id, current_user.token)
   end
 
   def handle_error(message = nil)

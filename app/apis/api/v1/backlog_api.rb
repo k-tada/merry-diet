@@ -2,7 +2,12 @@ module API
   module V1
     class BacklogApi < Grape::API
       # Authentication Error
-      rescue_from BacklogKit::Error, with: :handle_error
+      rescue_from BacklogKit::Error do |e|
+        # TODO エラーハンドリング
+        #      エラーの内容によってステータス変える？
+
+        error_response(message: e.message, status: 500)
+      end
 
       helpers do
         params :requires do
@@ -10,8 +15,36 @@ module API
           requires :space_id, type: String, desc: 'Backlog Space Id'
         end
 
+        params :proj do
+          requires :key, type: String, desc: 'Backlog Project key'
+          requires :name, type: String, desc: 'Backlog Project name'
+          optional :chartEnabled, type: Boolean, desc: 'default false'
+          optional :subtaskingEnabled, type: Boolean, desc: 'default false'
+          optional :textFormattingRule, type: String, desc: 'backlog or markdown(default markdown)'
+          optional :projectLeaderCanEditProjectLeader, type: Boolean, desc: 'default unused'
+        end
+
+        params :proj_id do
+          requires :proj_id, type: String, desc: 'Backlog Project ID'
+        end
+
+        params :task do
+          requires :summary, type: String, desc: 'Backlog issue title'
+          requires :description, type: String, desc: 'Backlog issue description'
+          optional :startDate, type: String, desc: 'Backlog issue start date ex. 2015-01-01'
+          optional :dueDate, type: String, desc: 'Backlog issue due date ex. 2015-01-01'
+        end
+
+        def proj_default_opt
+          {
+            chartEnabled: false,
+            subtaskingEnabled: false,
+            textFormattingRule: :markdown
+          }
+        end
+
         def backlog(params)
-          @backlog ||= Backlog::Tasks.new(params[:space_id], params[:token])
+          @backlog ||= Backlog.new(params[:space_id], params[:token])
         end
       end
 
@@ -27,21 +60,70 @@ module API
         resource :proj do
           desc 'GET /api/v1/backlog/proj'
           get '/' do
-            backlog(params).proj.all
+            present backlog(params).proj.all, with: API::V1::Entities::Backlog::ProjEntity
+          end
+
+          desc 'POST /api/v1/backlog/proj'
+          params do
+            use :proj
+          end
+          post '/' do
+            opts = proj_default_opt.merge(params.reject{|k, v| k == 'space_id' || k == 'token'})
+            present backlog(params).proj.create(opts.delete('key'), opts.delete('name'), opts), with: API::V1::Entities::Backlog::ProjEntity
+          end
+
+          desc 'GET /api/v1/backlog/proj/:id'
+          get '/:id' do
+            present backlog(params).proj.find(params[:id]), with: API::V1::Entities::Backlog::ProjEntity
+          end
+
+          #####
+          # Other API
+          route_param :proj_id do
+            resource :issueTypes do
+              desc 'GET /api/v1/backlog/proj/:proj_id/issueTypes'
+              get '/' do
+                backlog(params).proj.issue_types(params[:proj_id])
+              end
+            end
           end
         end
-      end
 
-      def handle_error(message = nil)
-        # TODO エラーハンドリング
-        #      一旦認証エラー時のみログイン画面に遷移する
-        # if auth_error?(message)
-        #   redirect_to '/signin', alert: "認証に失敗しました（#{message.to_s}）"
-        # else
-        #   raise BacklogKit::Error, message
+        ################
+        # Task API
+        params do
+          use :proj_id
+        end
+        resource :task do
+          desc 'GET /api/v1/backlog/task'
+          get '/' do
+            backlog(params).task.all(params[:proj_id])
+          end
+
+          desc 'GET /api/v1/backlog/task/for_notification'
+          params do
+            optional :date, type: String, desc: 'base date ex. 2015-01-01'
+          end
+          get '/for_notification' do
+            date = params[:date].present? ? DateTime.parse(params[:date]) : DateTime.now
+            backlog(params).task.find_by_due_date(date.strftime('%Y-%m-%d'), (date + 1).strftime('%Y-%m-%d'))
+          end
+
+          desc 'POST /api/v1/backlog/task'
+          params do
+            use :task
+          end
+          post '/' do
+            # opts = 
+          end
+        end
+
+        # ################
+        # # Other API
+        # params do
+        #   use :proj_id
         # end
-
-        error_response(message: message, status: 500)
+        # resource :
       end
     end
   end
