@@ -3,7 +3,11 @@
 <ul>
   <% @tasks.each do |t| %>
     <li>
-      <%= t.inspect %>
+      <ul>
+        <% t.each do |k, v| %>
+          <li><%= k %> : <%= v.inspect %></li>
+        <% end %>
+      </ul>
     </li>
   <% end %>
 </ul>

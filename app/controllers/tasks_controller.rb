@@ -5,31 +5,37 @@ class TasksController < ApplicationController
   rescue_from BacklogKit::Error, with: :handle_error
 
   def index
-    @tasks = backlog.proj.all
+    proj = merry.get_or_create_proj
+
+    raise BacklogKit::Error, "Project not found, and cannot create new project" if proj.blank?
+
+    @tasks = merry.get_tasks(proj.id)
   end
 
   def new
-    @task = backlog.proj.create('MERRY_DIET', 'メリーさんのダイエット講座', {
-      chartEnabled: false,
-      subtaskingEnabled: false,
-      textFormattingRule: :markdown
-    })
-    redirect_to task_path({id: @task['id']})
+    proj = merry.get_or_create_proj
+
+    raise BacklogKit::Error, "Project not found, and cannot create new project" if proj.blank?
+
+    # 対象のプロジェクトを取得・生成出来たら関連情報を取得・生成する
+    proj = merry.set_proj_infos(proj)
+
+    @tasks = [proj]
   end
 
   def create
   end
 
   def show
-    @task = backlog.proj.find(params[:id])
+    @task = {}
   end
 
   def delete
   end
 
   private
-  def backlog
-    @backlog ||= Backlog.new(current_user.space_id, current_user.token)
+  def merry
+    @merry ||= MerryBacklog.new(current_user.space_id, current_user.token)
   end
 
   def handle_error(message = nil)

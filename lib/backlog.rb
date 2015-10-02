@@ -24,16 +24,29 @@ class Backlog
       client.get_project(id).body
     end
 
-    def create(key, name, opts)
-      client.create_project(key, name, opts).body
+    def create(key, name, opts = {})
+      client.create_project(key, name, proj_default_opts.merge(opts)).body
     end
 
     def issue_types(id)
       client.get_issue_types(id).body
     end
 
+    def add_issue_type(id, name, color)
+      client.add_issue_type(id, name, color).body
+    end
+
     def priorities
       client.get_priorities.body
+    end
+
+    private
+    def proj_default_opts
+      {
+        chartEnabled: false,
+        subtaskingEnabled: false,
+        textFormattingRule: :markdown
+      }
     end
   end
 
