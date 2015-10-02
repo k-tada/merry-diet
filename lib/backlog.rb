@@ -57,6 +57,10 @@ class Backlog
     def create(proj_id, params)
       client.create_issue(params.delete(:summary), params.merge({projectId: proj_id})).body
     end
+
+    def delete(id)
+      client.delete_issue(id).body
+    end
   end
 
 

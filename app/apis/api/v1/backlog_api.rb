@@ -118,6 +118,11 @@ module API
           post '/' do
             present backlog(params).task.create(params[:proj_id], params.reject{|k, v| %w(space_id token proj_id).include? k})
           end
+
+          desc 'DELETE /api/v1/backlog/task/:id'
+          delete '/:id' do
+            present backlog(params).task.delete(params[:id])
+          end
         end
 
         ################
