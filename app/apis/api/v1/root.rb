@@ -9,6 +9,7 @@ module API
       default_format :json
 
       mount API::V1::TestApi
+      mount API::V1::BacklogApi
     end
   end
 end

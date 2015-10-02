@@ -47,6 +47,9 @@ gem 'omniauth'
 gem 'omniauth-oauth2', git: "git://github.com/k-tada/omniauth-oauth2.git"
 gem 'omniauth-backlog', git: "git://github.com/k-tada/omniauth-backlog.git"
 
+# Backlog
+gem 'backlog_kit'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
