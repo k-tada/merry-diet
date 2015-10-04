@@ -10,7 +10,6 @@ module API
 
       mount API::V1::TestApi
       mount API::V1::BacklogApi
-      mount API::V1::TwilioApi
     end
   end
 end
