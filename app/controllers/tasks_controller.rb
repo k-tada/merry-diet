@@ -10,6 +10,7 @@ class TasksController < ApplicationController
     raise BacklogKit::Error, "Project not found, and cannot create new project" if proj.blank?
 
     @tasks = merry.get_tasks(proj.id)
+                  .select {|t| t.status.name != '完了' }
                   .map {|t| Task.new(t) }
                   .map {|t| t.when = DateTime.parse(t.when).strftime('%m/%d'); t }
                   .sort {|a, b| DateTime.parse(b.when) <=> DateTime.parse(a.when)}
