@@ -1,4 +1,5 @@
 <h1>タスク登録（デザインは後で当て込み）</h1>
+<%= form_for @task do |f| %>
 <div class="contents">
   <hr>
   <div class="merry">
@@ -15,7 +16,7 @@
     </div>
     <div class="me">
       <div class="bubble answer">
-        <input type="text" id="when" class="datetimepicker">でお願い。
+        <%= f.text_field :when, class: 'datetimepicker' %>でお願い。
       </div>
     </div>
   </section>
@@ -28,7 +29,7 @@
     </div>
     <div class="me">
       <div class="bubble answer">
-        <input type="number" id="distance">kmぐらいかな。
+        <%= f.number_field :distance %>kmぐらいかな。
       </div>
     </div>
   </section>
@@ -41,8 +42,9 @@
     </div>
     <div class="me">
       <div class="bubble answer">
-        <input type="submit" value="OK!!!">
+        <%= f.submit 'OK!!!' %>
       </div>
     </div>
   </section>
 </div>
+<% end %>

@@ -21,13 +21,17 @@ class MerryBacklog < Backlog
   end
 
   def set_proj_infos(_proj)
-    _proj['priority'] = get_priority
-    _proj['issue_type'] = get_or_create_issue_types(_proj.id)
+    _proj[:priority] = get_priority
+    _proj[:issue_type] = get_or_create_issue_types(_proj.id)
     _proj
   end
 
   def get_tasks(id)
     task.all(id).select {|t| t.issueType.name == CONF.issue_type.name}
+  end
+
+  def register_task(proj_id, params)
+    task.create(proj_id, params)
   end
 
   private
