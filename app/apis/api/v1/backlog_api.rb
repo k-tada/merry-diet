@@ -37,14 +37,6 @@ module API
           optional :dueDate, type: String, desc: 'Backlog issue due date ex. 2015-01-01'
         end
 
-        def proj_default_opt
-          {
-            chartEnabled: false,
-            subtaskingEnabled: false,
-            textFormattingRule: :markdown
-          }
-        end
-
         def backlog(params)
           @backlog ||= Backlog.new(params[:space_id], params[:token])
         end
@@ -70,7 +62,7 @@ module API
             use :proj
           end
           post '/' do
-            opts = proj_default_opt.merge(params.reject{|k, v| %w(space_id token).include? k})
+            opts = params.reject{|k, v| %w(space_id token).include? k}
             present backlog(params).proj.create(opts.delete('key'), opts.delete('name'), opts), with: API::V1::Entities::Backlog::ProjEntity
           end
 

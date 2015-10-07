@@ -1,11 +1,15 @@
-<h1>Tasks#index</h1>
-
-<ul>
-  <% @tasks.each do |t| %>
-    <li>
-      <%= t.inspect %>
-    </li>
-  <% end %>
-</ul>
-
-
+<nav>
+  <ul>
+    <li><%= link_to 'New', new_task_path %></li>
+    <li><a href="#">Setting</a></li>
+    <li><a href="#">MyHome</a></li>
+    <% @tasks.each do |t| %>
+      <li>
+        <a href="#">
+          <div><%= t.when %></div>
+          <div><%= t.distance %>km</div>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</nav>
