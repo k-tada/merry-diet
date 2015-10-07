@@ -41,7 +41,7 @@ class MerryBacklog < Backlog
 
   def create_proj
     conf = CONF.proj
-    proj.create(conf.key, conf.name)
+    proj.create(conf.pkey, conf.name)
   end
 
   def get_priority

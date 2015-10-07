@@ -1,16 +1,15 @@
-<h1>タスク一覧</h1>
-
-<ul>
-  <% @tasks.each do |t| %>
-    <li>
-      <ul>
-        <% t.each do |k, v| %>
-          <li><%= k %> : <%= v.inspect %></li>
-        <% end %>
-      </ul>
-    </li>
-  <% end %>
-</ul>
-
-<%= link_to '新規登録', new_task_path %>
-
+<nav>
+  <ul>
+    <li><%= link_to 'New', new_task_path %></li>
+    <li><a href="#">Setting</a></li>
+    <li><a href="#">MyHome</a></li>
+    <% @tasks.each do |t| %>
+      <li>
+        <a href="#">
+          <div><%= t.when %></div>
+          <div><%= t.distance %>km</div>
+        </a>
+      </li>
+    <% end %>
+  </ul>
+</nav>

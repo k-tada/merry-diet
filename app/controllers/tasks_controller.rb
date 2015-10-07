@@ -10,6 +10,9 @@ class TasksController < ApplicationController
     raise BacklogKit::Error, "Project not found, and cannot create new project" if proj.blank?
 
     @tasks = merry.get_tasks(proj.id)
+                  .map {|t| Task.new(t) }
+                  .map {|t| t.when = DateTime.parse(t.when).strftime('%m/%d'); t }
+                  .sort {|a, b| DateTime.parse(b.when) <=> DateTime.parse(a.when)}
   end
 
   def new
@@ -19,23 +22,27 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
 
-    proj = merry.get_or_create_proj
+    if @task.when.present? and @task.distance.present?
+      proj = merry.get_or_create_proj
 
-    raise BacklogKit::Error, "Project not found, and cannot create new project" if proj.blank?
+      raise BacklogKit::Error, "Project not found, and cannot create new project" if proj.blank?
 
-    # 対象のプロジェクトを取得・生成出来たら関連情報を取得・生成する
-    proj = merry.set_proj_infos(proj)
+      # 対象のプロジェクトを取得・生成出来たら関連情報を取得・生成する
+      proj = merry.set_proj_infos(proj)
 
-    merry.register_task(proj.id, {
-      summary: "#{@task.when}に#{@task.distance}km歩く",
-      description: @task.to_json,
-      issueTypeId: proj[:issue_type].id,
-      priorityId: proj[:priority].id,
-      startDate: @task.get_date,
-      dueDate: @task.get_date
-    })
+      merry.register_task(proj.id, {
+        summary: "#{@task.when}に#{@task.distance}km歩く",
+        description: @task.to_json,
+        issueTypeId: proj[:issue_type].id,
+        priorityId: proj[:priority].id,
+        startDate: @task.get_date,
+        dueDate: @task.get_date
+      })
 
-    redirect_to tasks_path
+      redirect_to tasks_path
+    else
+      redirect_to new_task_path
+    end
   end
 
   def show
