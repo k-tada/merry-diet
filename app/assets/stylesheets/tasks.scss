@@ -1,3 +1,47 @@
 // Place all the styles related to the Tasks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.contents {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+.merry {
+  margin: 5px 10px;
+}
+.me {
+  margin: 5px 10px;
+  text-align: right;
+}
+$q_color : #fcf;
+$a_color : #3cf;
+.bubble {
+  display: inline-block;
+  position: relative;
+  padding: 1em;
+  border-radius: 5px;
+  
+  &:after {
+    position: absolute;
+    content: " ";
+    height: 0;
+    width: 0;
+  }
+}
+.question {
+  background: $q_color;
+  &:after {
+    right: 100%;
+    top: 10%;
+    border-top: 10px solid $q_color;
+    border-left: 10px solid transparent;
+  }
+}
+.answer {
+  background: $a_color;
+  &:after {
+    left: 100%;
+    top: 10%;
+    border-top: 10px solid $a_color;
+    border-right: 10px solid transparent;
+  }
+}
