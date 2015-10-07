@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/alexpeattie/heroku_secrets.git
+  revision: 717af8e0acf399bc88d2c8c1a7e230023942af0f
+  specs:
+    heroku_secrets (0.0.2)
+
+GIT
   remote: git://github.com/k-tada/omniauth-backlog.git
   revision: 3c79fbe6d3427a32802ea4421e7c2cc7ed5c7aff
   specs:
@@ -258,6 +264,7 @@ DEPENDENCIES
   grape-entity
   grape-swagger
   grape-swagger-rails
+  heroku_secrets!
   jbuilder (~> 2.0)
   jquery-rails
   jquery-ui-rails
