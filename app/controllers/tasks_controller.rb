@@ -62,7 +62,7 @@ class TasksController < ApplicationController
     # TODO エラーハンドリング
     #      一旦認証エラー時のみログイン画面に遷移する
     if auth_error?(message)
-      redirect_to '/signin', alert: "認証に失敗しました（#{message.to_s}）"
+      redirect_to '/signin', alert: "認証に失敗しました"
     else
       raise BacklogKit::Error, message
     end
