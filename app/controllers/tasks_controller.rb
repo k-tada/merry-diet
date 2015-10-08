@@ -14,6 +14,7 @@ class TasksController < ApplicationController
                   .map {|t| Task.new(t) }
                   .map {|t| t.when = DateTime.parse(t.when).strftime('%m/%d'); t }
                   .sort {|a, b| DateTime.parse(b.when) <=> DateTime.parse(a.when)}
+                  .take (3) # TODO 表示数は設定値に移動する
   end
 
   def new
