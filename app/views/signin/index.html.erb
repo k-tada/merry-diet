@@ -1,8 +1,14 @@
-<h1>Signin#index</h1>
-<% flash.each do |k, v| %>
-  <%= content_tag(:div, v, class: k) %>
-<% end %>
-<%= form_tag '/signin/auth', method: :post do %>
-  <%= text_field_tag 'space_id' %>
-  <%= submit_tag 'Sign in' %>
-<% end %>
+<nav>
+  <div class="contents">
+    <% flash.each do |k, v| %>
+      <%= content_tag(:div, v, class: k) %>
+    <% end %>
+    <div class="signin">
+      <p>Input Backlog Space ID<br /> (https://<font color="red">xxx</font>.backlog.jp/)</p>
+      <%= form_tag '/signin/auth', method: :post do %>
+        <%= text_field_tag 'space_id' %>
+        <%= submit_tag 'Sign in' %>
+      <% end %>
+    </div>
+  </div>
+</nav>

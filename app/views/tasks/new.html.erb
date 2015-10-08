@@ -1,49 +1,51 @@
-<%= form_for @task do |f| %>
-<div class="contents">
-  <hr>
-  <div class="merry">
-    <div class="bubble question">
-      <div class="message">新しいタスクを登録するのね</div>
-    </div>
+<nav>
+  <div class="contents">
+    <%= form_for @task do |f| %>
+      <hr>
+      <div class="merry">
+        <div class="bubble question">
+          <div class="message">新しいタスクを登録するのね</div>
+        </div>
+      </div>
+      <hr>
+      <section class="when">
+        <div class="merry">
+          <div class="bubble question">
+            <div class="message">いつ？</div>
+          </div>
+        </div>
+        <div class="me">
+          <div class="bubble answer">
+            <%= f.text_field :when, class: 'datetimepicker' %>でお願い。
+          </div>
+        </div>
+      </section>
+      <hr>
+      <section class="distance">
+        <div class="merry">
+          <div class="bubble question">
+            <div class="message">どのぐらい歩くの？</div>
+          </div>
+        </div>
+        <div class="me">
+          <div class="bubble answer">
+            <%= f.number_field :distance %>kmぐらいかな。
+          </div>
+        </div>
+      </section>
+      <hr>
+      <section class="distance">
+        <div class="merry">
+          <div class="bubble question">
+            <div class="message">これでOK？</div>
+          </div>
+        </div>
+        <div class="me">
+          <div class="bubble answer">
+            <%= f.submit 'OK!!!' %>
+          </div>
+        </div>
+      </section>
+    <% end %>
   </div>
-  <hr>
-  <section class="when">
-    <div class="merry">
-      <div class="bubble question">
-        <div class="message">いつ？</div>
-      </div>
-    </div>
-    <div class="me">
-      <div class="bubble answer">
-        <%= f.text_field :when, class: 'datetimepicker' %>でお願い。
-      </div>
-    </div>
-  </section>
-  <hr>
-  <section class="distance">
-    <div class="merry">
-      <div class="bubble question">
-        <div class="message">どのぐらい歩くの？</div>
-      </div>
-    </div>
-    <div class="me">
-      <div class="bubble answer">
-        <%= f.number_field :distance %>kmぐらいかな。
-      </div>
-    </div>
-  </section>
-  <hr>
-  <section class="distance">
-    <div class="merry">
-      <div class="bubble question">
-        <div class="message">これでOK？</div>
-      </div>
-    </div>
-    <div class="me">
-      <div class="bubble answer">
-        <%= f.submit 'OK!!!' %>
-      </div>
-    </div>
-  </section>
-</div>
-<% end %>
+</nav>
