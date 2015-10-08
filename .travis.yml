@@ -1,9 +1,13 @@
 language: ruby
 rvm:
 - 2.0.0
-- 1.9.3
-- jruby-19mode
-- rbx-2
+# - 1.9.3
+# - jruby-19mode
+# - rbx-2
+install: bundle install --without production --deployment
+cache:
+  directories:
+    - vendor/bundle
 deploy:
   provider: heroku
   api_key:
