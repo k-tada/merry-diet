@@ -61,6 +61,8 @@ group :development, :test do
   gem 'byebug'
 
   gem 'sqlite3'
+
+  gem 'travis'
 end
 
 group :development do

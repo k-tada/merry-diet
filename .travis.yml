@@ -1,0 +1,13 @@
+language: ruby
+rvm:
+- 2.0.0
+- 1.9.3
+- jruby-19mode
+- rbx-2
+deploy:
+  provider: heroku
+  api_key:
+    secure: gRRZ7LVS/K7zabgKzrecZo7tCzbtXRo2CSmb+VzvNcOQ8lWwQGf0jhc8dCo2uZkXS7RptWBS0hKnaS6mynhYZLS4v+oYl9SoGfMxgPBrRbS71FEoCJ5+0dkiTdsfbomlkYX8d+dpG/hZpSTJ3uMX30Mfq6MF4W8ZzjQHYJjfk/vc3A+Thyl9om6Bdr34d8Xgq345b+eyO8qC99i/MjQ4Hj5g2XGtdsxz6tPv8oC2wyqmaPc6d1WY1Xz3DupdBmCuUVhY91fce0Z76YAyeDrXsd46VIvuxL4Hp3HdybZH4RBPPVqfvRjdzmBe1rwOGyQZx3vBRcKvVPevq+jLD2Zi0W/peUEpzfzxLoKA8e0I2BDUIIfs9xRVyA7jCdNCXFToadV/U/NLRfT0bS81PIy8FnFVzf8g8WjpxspLSvMj0S9pxv91AuLZUZXNM/1VQvojMn6svTco0FqzfYisejAj3DM4PeGAfWVglzA+ZDWuHgjljK29zle4kkkLQc8sYfXVX8UI9eEqhh2+7L6QBysTlXW4dmWdBuCwFnignEwG9C17G6hatFli0+kXDZGL/M3ngAXWbkvg4QKrxqNQ+mwXrH6CZsXX6/mb9zwp7AoCM3YCz61p+8F2Akid58gNeP8VdkAGWTwcMU5ZtyiQAvWoSnD1fvgw2g5RftQYfMtDi4Y=
+  app: merry-diet
+  on:
+    repo: k-tada/merry-diet
