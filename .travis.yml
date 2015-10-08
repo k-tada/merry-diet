@@ -1,13 +1,7 @@
 language: ruby
 rvm:
 - 2.0.0
-# - 1.9.3
-# - jruby-19mode
-# - rbx-2
-install: bundle install --without production --deployment
-cache:
-  directories:
-    - vendor/bundle
+cache: bundler
 deploy:
   provider: heroku
   api_key:
@@ -15,3 +9,6 @@ deploy:
   app: merry-diet
   on:
     repo: k-tada/merry-diet
+notifications:
+  slack:
+    secure: BWjvRWovhWPANI7OiM9DYizkGhKuFGQh72mVsDepjq/eB3uLt1SxahcnWIdgFwRvkv7QHrMmDu/7GA689jyeCrqAEVNmXa6cbDgcEas+/HWWfHCu4IY9TvLCsc6LdyZ5iRB4JlYFPDFRGE1MAXSyiDF8S5ZIPhB4+wMhNW6UW7jnfxG4qVRunMXfVD4CMpQ0F/toVTvB6fx9UeTz7goxpPv1/j8vth5fa9FbXFQiF4RjL6Yw+QVtos0FWUJrlQDE0nML/6xs+//lSqPySlWbEaBd3sgWUXlImm99xCCesd5eMcLWes9aVBMEimpzAOmf2dkyHhgnuc1GhSdWQf5RMil3VR3vjEBnjdrRY6Hx7qjtdIPu4IiIm4JVB8sFGWCyOI3UI15gcLvalcrJpB+ZODB9qItwp+Qn4Pg/+gt3GHrH0KD916BU2C4qDo1DVQEt3BejHUg2i0ikPzVFZh2aZxJu46r+mQMxhWredydflRYOP7a4hHsOLn9Ak5XoCPxHj0n9pD4sJKY5ULmMAiQD+CnTfvhLoHlJeXq/njF1+j21BlAEKajLyluoWs/TygK/GStcpPaKFRSCJezKnB0soCPaEtZ2F9EeyfXcrlFauuEtSjk9OJu72shPCQztNofer0j5YCtJXX/xhwqMP7VGZZzy1D0z1XVyu2yplNQobRs=
