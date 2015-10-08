@@ -36,9 +36,17 @@ h1 {
   text-align: center;
 }
 
-nav ul {
-  width: 290px;
+@mixin page($width) {
+  width: $width;
   margin: 20px auto;
+}
+
+nav .contents {
+  @include page(400px);
+}
+
+nav ul {
+  @include page(290px);
 
   li {
     float: left;
@@ -64,10 +72,10 @@ nav ul {
   }
 }
 
-.contents {
-  margin-left: 10%;
-  margin-right: 10%;
+.signin {
+  text-align: center;
 }
+
 .merry {
   margin: 5px 10px;
 }
