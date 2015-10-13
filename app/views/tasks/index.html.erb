@@ -1,7 +1,7 @@
 <nav>
   <ul>
     <li><%= link_to 'New', new_task_path %></li>
-    <li><a href="#">Setting</a></li>
+    <li><%= link_to 'Setting', '/users/setting' %></li>
     <li><a href="#">MyHome</a></li>
     <% @tasks.each do |t| %>
       <li>
