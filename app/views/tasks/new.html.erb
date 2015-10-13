@@ -33,6 +33,23 @@
           </div>
         </div>
       </section>
+      <% unless @user.phone_number.present? %>
+      <%= fields_for @user do |u| %>
+      <hr>
+      <section class="phone_number">
+        <div class="merry">
+          <div class="bubble question">
+            <div class="message">電話番号が未登録みたいね。教えてくれる？</div>
+          </div>
+        </div>
+        <div class="me">
+          <div class="bubble answer">
+            <%= u.telephone_field :phone_number %>でお願い。
+          </div>
+        </div>
+      </section>
+      <% end %>
+      <% end %>
       <hr>
       <section class="distance">
         <div class="merry">
