@@ -1,5 +1,8 @@
 <nav>
   <div class="contents">
+    <% flash.each do |k, v| %>
+      <%= content_tag(:div, v, class: k) %>
+    <% end %>
     <%= form_for @user, url: '/users/setting' do |u| %>
       <hr>
       <section class="phone_number">

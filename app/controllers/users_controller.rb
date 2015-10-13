@@ -9,7 +9,7 @@ class UsersController < ApplicationController
     if valid? and @user.update(user_params)
       redirect_to tasks_path
     else
-      redirect_to '/users/setting'
+      redirect_to '/users/setting', :alert => @error
     end
   end
 
@@ -21,6 +21,8 @@ class UsersController < ApplicationController
     params.require(:user).permit(:phone_number)
   end
   def valid?
-    user_params[:phone_number].present?
+    ret = user_params[:phone_number].present?
+    @error = '電話番号を入力してよね' unless ret
+    ret
   end
 end
