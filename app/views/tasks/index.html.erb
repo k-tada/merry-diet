@@ -1,8 +1,14 @@
+<div id="top">
+
+<h1><%= image_tag 'logo.png', alt: "メリーダイエット！" %></h1>
+
 <nav>
   <ul>
-    <li><%= link_to 'New', new_task_path %></li>
-    <li><%= link_to 'Setting', '/users/setting' %></li>
-    <li><a href="#">MyHome</a></li>
+    <li><%= link_to image_tag('icon_new.png', size: '40x50', alt: 'icon') + 'NEW', new_task_path %></li>
+    <li><%= link_to image_tag('icon_setting.png', size: '35x50', alt: 'icon') + 'SETTING', '/users/setting' %></li>
+    <li><%= link_to image_tag('icon_myhome.png', size: '27x50', alt: 'icon') + 'MYHOME', '#' %></li>
+  </ul>
+  <ul class="task">
     <% @tasks.each do |t| %>
       <li>
         <a href="#">
@@ -13,3 +19,6 @@
     <% end %>
   </ul>
 </nav>
+
+</div><!-- /#top -->
+
