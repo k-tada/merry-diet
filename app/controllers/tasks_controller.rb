@@ -19,12 +19,14 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
+    @user = current_user
   end
 
   def create
     @task = Task.new(task_params)
+    @user = current_user
 
-    if @task.when.present? and @task.distance.present?
+    if @task.when.present? and @task.distance.present? and user_update
       proj = merry.get_or_create_proj
 
       raise BacklogKit::Error, "Project not found, and cannot create new project" if proj.blank?
@@ -75,5 +77,14 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).permit(:when, :distance)
+  end
+
+  def user_params
+    params.require(:user).permit(:phone_number) if @user.phone_number.blank?
+  end
+
+  def user_update
+    return true if @user.blank? || user_params.blank?
+    @user.update(user_params)
   end
 end
