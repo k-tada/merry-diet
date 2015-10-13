@@ -1,35 +1,27 @@
-<nav>
-  <div class="contents">
-    <% flash.each do |k, v| %>
-      <%= content_tag(:div, v, class: k) %>
-    <% end %>
-    <%= form_for @user, url: '/users/setting' do |u| %>
-      <hr>
-      <section class="phone_number">
-        <div class="merry">
-          <div class="bubble question">
-            <div class="message">電話番号を変更するのね。教えてくれる？</div>
-          </div>
-        </div>
-        <div class="me">
-          <div class="bubble answer">
-            <%= u.telephone_field :phone_number %>でお願い。
-          </div>
-        </div>
-      </section>
-      <hr>
-      <section class="distance">
-        <div class="merry">
-          <div class="bubble question">
-            <div class="message">これでOK？</div>
-          </div>
-        </div>
-        <div class="me">
-          <div class="bubble answer">
-            <%= u.submit 'OK!!!' %>
-          </div>
-        </div>
-      </section>
-    <% end %>
-  </div>
+<nav class="header-nav">
+  <%= link_to image_tag('btn_back.png', size: '42x42', alt:'Back'), tasks_path %>
 </nav>
+<div id="contents">
+  <% flash.each do |k, v| %>
+    <%= content_tag(:div, v, class: k) %>
+  <% end %>
+  <%= form_for @user, url: '/users/setting' do |u| %>
+    <dl class="question clearfix">
+      <dt><%= image_tag 'face_merry03.png', size: '50x50', alt: 'メリーさん' %></dt>
+      <dd><div class="bubble"><div class="message">電話番号を変更するのね。教えてくれる？</div></div></dd>
+    </dl>
+    <dl class="answer clearfix">
+      <dt><%= image_tag 'face_user.png', size: '50x50', alt: 'あなた' %></dt>
+      <dd><div class="bubble"><div class="message"><%= u.telephone_field :phone_number %>でお願い。</div></div></dd>
+    </dl>
+    <dl class="question clearfix">
+      <dt><%= image_tag 'face_merry01.png', size: '50x50', alt: 'メリーさん' %></dt>
+      <dd><div class="bubble"><div class="message">これで登録するけどいい？</div></div></dd>
+    </dl>
+
+    <dl class="answer clearfix">
+      <dt><%= image_tag 'face_user.png', size: '50x50', alt: 'あなた' %></dt>
+      <dd><div class="bubble"><div class="message"><%= u.submit 'OK!!!' %></div></div></dd>
+    </dl>
+  <% end %>
+</div>
