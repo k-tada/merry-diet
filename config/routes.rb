@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   mount API::Root => '/'
   mount GrapeSwaggerRails::Engine => '/docs'
 
+  get 'users/setting' => 'users#setting'
+  patch 'users/setting' => 'users#update_setting'
+
   get 'signin' => 'signin#index'
   post 'signin/auth'
   get 'about/me'
