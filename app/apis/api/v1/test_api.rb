@@ -3,12 +3,14 @@ module API
     class TestApi < Grape::API
       resource :test do
         desc 'GET /api/v1/test'
+        params do
+          requires :tel, type:String
+          requires :datetime, type:DateTime
+          requires :distance, type:Integer
+        end
         get '/' do
-          ret = {
-            user: 'Tom',
-            message: 'ok'
-          }
-          present ret, with: API::V1::Entities::TestEntity
+          MerryTwilio.new.call_to(params[:tel], params[:datetime], params[:distance])
+          {message: :ok}
         end
       end
     end

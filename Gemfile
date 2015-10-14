@@ -52,6 +52,9 @@ gem 'backlog_kit'
 # JQuery
 gem 'jquery-ui-rails'
 
+# Twilio
+gem 'twilio-ruby'
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-xdan--datetimepicker'
 end
