@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
         email:    auth.info.email,
         password: Devise.friendly_token[0, 20],
         token:    auth.credentials.token,
+        refresh_token: auth.credentials.refresh_token,
         space_id: space_id,
         uuid:     SecureRandom.hex
       )

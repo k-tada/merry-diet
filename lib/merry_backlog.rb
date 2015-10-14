@@ -16,6 +16,10 @@ class MerryBacklog < Backlog
     super(space_id, token)
   end
 
+  def get_proj
+    proj.all.select {|r| r.projectKey == CONF.proj.pkey}.first
+  end
+
   def get_or_create_proj
     get_proj || create_proj
   end
@@ -30,15 +34,27 @@ class MerryBacklog < Backlog
     task.all(id).select {|t| t.issueType.name == CONF.issue_type.name}
   end
 
+  def get_today_tasks
+    date = DateTime.now
+    task.find_by_due_date(date.strftime('%Y-%m-%d'), (date + 1).strftime('%Y-%m-%d'))
+  end
+
   def register_task(proj_id, params)
     task.create(proj_id, params)
   end
 
-  private
-  def get_proj
-    proj.all.select {|r| r.projectKey == CONF.proj.pkey}.first
+  def refresh_token(user)
+    res = RestClient.post(
+      'https://' + user.space_id + '.backlog.jp/api/v2/oauth2/token',
+      grant_type: 'refresh_token',
+      refresh_token: user.refresh_token,
+      client_id: Rails.application.secrets.backlog_client_id,
+      client_secret: Rails.application.secrets.backlog_client_secret
+    )
+    JSON.parse(res.body)
   end
 
+  private
   def create_proj
     conf = CONF.proj
     proj.create(conf.pkey, conf.name)

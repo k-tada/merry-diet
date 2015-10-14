@@ -55,6 +55,8 @@ gem 'jquery-ui-rails'
 # Twilio
 gem 'twilio-ruby'
 
+gem 'rest-client'
+
 source 'https://rails-assets.org' do
   gem 'rails-assets-xdan--datetimepicker'
 end
