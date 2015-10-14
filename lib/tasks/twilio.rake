@@ -1,6 +1,9 @@
 namespace :twilio do
   desc "Twilio"
   task call: :environment do
+    # 課題抽出範囲（現在日時の10分後〜70分後）
+    from = 10.minutes.since
+    to = 70.minutes.since
     # 非効率だけど仕方ない
     users = User.select(:id, :token, :refresh_token, :space_id, :phone_number).distinct
     users.each do |user|
@@ -22,9 +25,7 @@ namespace :twilio do
         end
       end
 
-      # 日時で課題を抽出（現在日時〜10分後）
-      from = DateTime.now
-      to = 10.minutes.since
+      # 日時で課題を抽出
       tasks = backlog
                 .get_today_tasks
                 .select {|t| t.status.name != '完了'}
