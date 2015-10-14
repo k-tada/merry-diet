@@ -36,7 +36,7 @@ class TasksController < ApplicationController
 
       merry.register_task(proj.id, {
         summary: "#{@task.when}に#{@task.distance}km歩く",
-        description: @task.to_json,
+        description: @task.to_hash.merge({user_id: @user.uuid}).to_json,
         issueTypeId: proj[:issue_type].id,
         priorityId: proj[:priority].id,
         startDate: @task.get_date,

@@ -7,12 +7,12 @@ class Task
   validates :distance, presence: true
 
   def initialize(arg = {})
-    params = JSON.parse(arg.description) if arg.is_a?(BacklogKit::Resource)
+    params = JSON.parse(arg.description).reject{|k, v| k == 'user_id'} if arg.is_a?(BacklogKit::Resource)
     super(params || arg)
   end
 
-  def to_json
-    {when: self.when, distance: self.distance}.to_json
+  def to_hash
+    {when: self.when, distance: self.distance}
   end
 
   def get_date
