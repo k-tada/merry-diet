@@ -1,13 +1,14 @@
 class Task
   include ActiveModel::Model
 
-  attr_accessor :when, :distance
+  attr_accessor :id, :when, :distance
 
+  validates :id, presence: true
   validates :when, presence: true
   validates :distance, presence: true
 
   def initialize(arg = {})
-    params = JSON.parse(arg.description).reject{|k, v| k == 'user_id'} if arg.is_a?(BacklogKit::Resource)
+    params = {id: arg.issueKey}.merge(JSON.parse(arg.description).reject{|k, v| k == 'user_id'}) if arg.is_a?(BacklogKit::Resource)
     super(params || arg)
   end
 

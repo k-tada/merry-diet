@@ -4,6 +4,8 @@
 
 ready = () ->
   $('.datetimepicker').datetimepicker()
+  $('#top .task li a').click () ->
+    confirm "このタスクを完了にするわよ"
 
 
 $(document).ready ready
