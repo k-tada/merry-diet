@@ -81,11 +81,17 @@ body {
       }
     }
 
-    ul.task li a {
-      background: #00aef6;
-      color: #fff;
-      font-size:18px;
-      padding: 20px 10px 0;
+    ul.task li {
+      a {
+        background: #00aef6;
+        color: #fff;
+        font-size:18px;
+        padding: 20px 10px 0;
+      }
+
+      a.today {
+        background: #f63;
+      }
     }
   }
 }
