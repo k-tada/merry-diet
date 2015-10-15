@@ -12,8 +12,8 @@ class TasksController < ApplicationController
     @tasks = merry.get_tasks(proj.id)
                   .select {|t| t.status.name != '完了' }
                   .map {|t| Task.new(t) }
-                  .select {|t| t.future?}
                   .map {|t| t.when = DateTime.parse(t.when).strftime('%m/%d'); t }
+                  .select {|t| t.future?}
                   .sort {|a, b| DateTime.parse(a.when) <=> DateTime.parse(b.when)}
                   .take (MerryDietConstants::TASK_VIEW_NUM)
   end
