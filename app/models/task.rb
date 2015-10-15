@@ -18,4 +18,8 @@ class Task
   def get_date
     date = DateTime.parse(self.when).strftime('%Y-%m-%d')
   end
+
+  def future?
+    Time.zone.parse(self.when).to_datetime >= Time.zone.now
+  end
 end
