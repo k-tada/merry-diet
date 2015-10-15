@@ -74,6 +74,10 @@ class Backlog
     def delete(id)
       client.delete_issue(id).body
     end
+
+    def finish(id)
+      client.update_issue(id, {statusId: 4}).body
+    end
   end
 
 

@@ -57,6 +57,11 @@ class TasksController < ApplicationController
   def delete
   end
 
+  def finish
+    merry.finish_task(params[:id])
+    redirect_to tasks_path
+  end
+
   private
   def merry
     @merry ||= MerryBacklog.new(current_user.space_id, current_user.token)

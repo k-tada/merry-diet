@@ -43,6 +43,10 @@ class MerryBacklog < Backlog
     task.create(proj_id, params)
   end
 
+  def finish_task(id)
+    task.finish(id)
+  end
+
   def refresh_token(user)
     res = RestClient.post(
       'https://' + user.space_id + '.backlog.jp/api/v2/oauth2/token',
