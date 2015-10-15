@@ -21,6 +21,6 @@ class Task
   end
 
   def future?
-    Time.zone.parse(self.when).to_datetime >= Time.zone.now
+    Date.parse(self.when) >= Date.today
   end
 end
