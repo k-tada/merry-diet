@@ -11,9 +11,10 @@
   <ul class="task">
     <% @tasks.each do |t| %>
       <li>
-        <a href="/tasks/<%= t.id %>/finish"<%= today?(t) ? ' class=today' : '' %>>
-          <div><%= t.when %></div>
-          <div><%= t.distance %>km</div>
+        <a href="/tasks/<%= t.id %>/finish">
+          <p<%= today?(t) ? ' class=today' : ''%>><%= image_tag 'label_today.png', alt: "Today", width: '36', height: '36'%></p>
+          <%= t.when %><br>
+          <%= t.distance %>km
         </a>
       </li>
     <% end %>
