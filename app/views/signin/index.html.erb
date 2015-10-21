@@ -9,7 +9,7 @@
     <p>Input Backlog Space ID<br /> (https://<font color="red">xxx</font>.backlog.jp/)</p>
     <%= form_tag '/signin/auth', method: :post do %>
       <%= text_field_tag 'space_id' %>
-      <%= submit_tag 'Sign in' %>
+      <%= submit_tag 'Sign in', data: {disable_with: '処理中...'} %>
     <% end %>
   </div>
 </div>
