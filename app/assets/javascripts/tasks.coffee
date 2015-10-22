@@ -6,6 +6,8 @@ ready = () ->
   $('.datetimepicker').datetimepicker()
   $('#top .task li a').click () ->
     confirm "このタスクを完了にするわよ"
+  $('img.comingsoon').click () ->
+    alert 'まだ準備出来てないからもうちょっと待っててよね！'
 
 
 $(document).ready ready
