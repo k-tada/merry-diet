@@ -2,14 +2,18 @@
   <%= link_to image_tag('btn_back.png', size: '42x42', alt:'Back'), tasks_path %>
 </nav>
 <div id="contents">
-  <% flash.each do |k, v| %>
-    <%= content_tag(:div, v, class: k) %>
+  <% if flash.present? %>
+  <div class="signin-error">
+    <% flash.each do |k, v| %>
+      <%= content_tag(:span, v, class: k) %>
+    <% end %>
+  </div>
   <% end %>
-  <div class="signin">
-    <p>Input Backlog Space ID<br /> (https://<font color="red">xxx</font>.backlog.jp/)</p>
+  <div id="signin">
+    <p>Backlog スペースIDを<br/>入力してください。</p>
     <%= form_tag '/signin/auth', method: :post do %>
       <%= text_field_tag 'space_id' %>
-      <%= submit_tag 'Sign in', data: {disable_with: '処理中...'} %>
+      <%= submit_tag 'SIGN IN', data: {disable_with: 'Processing...'} %>
     <% end %>
   </div>
 </div>
