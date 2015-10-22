@@ -1,16 +1,77 @@
 // Place all the styles related to the signin controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.alert {
-  background-color: #fcf;
-  text-align: left;
-  padding: 5px;
-  width: 80% auto;
-  margin: 20px 0 0;
-}
+// .alert {
+//   background-color: #fcf;
+//   text-align: left;
+//   padding: 5px;
+//   width: 80% auto;
+//   margin: 20px 0 0;
+// }
+//
+// .signin {
+//   text-align: center;
+//   margin: 20px 0 0;
+// }
 
-.signin {
+#signin {
+  border: #111 3px solid;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+  background: #fff;
+  margin: 14px;
   text-align: center;
-  margin: 20px 0 0;
+
+  p {
+    margin: 20px;
+    font-size:16px;
+  }
+
+  input[type=text] {
+    width: 218px;
+    border: 2px #000 solid;
+    padding: 10px;
+    background-color: #f2f2f2;
+    font-size: 110%;
+  }
+
+  input[type=submit] {
+    background: #000;
+    border: 0;
+    color: #fff;
+    width: 240px;
+    height: 40px;
+    padding: 10px 10px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    box-shadow: 0 2px 0 rgba(0,0,0,0.2);
+    font-weight: bold;
+    font-size: 110%;
+    margin: 14px 14px 30px;
+
+    &:disabled {
+      background: #666;
+      color: #ccc;
+    }
+  }
+}
+.signin-error {
+  font-size:14px;
+  background-color: #ffe6e6;
+  border: 2px #ff5e5e solid;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  margin: 14px;
+  padding: 10px;
+
+  span {
+    background: image-url('icon_error.png') no-repeat left center;
+    background-size: 18px;
+    padding: 4px 0 4px 24px;
+  }
 }
 
