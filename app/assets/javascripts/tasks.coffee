@@ -3,7 +3,12 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 ready = () ->
-  $('.datetimepicker').datetimepicker()
+  $('.datetimepicker').datetimepicker {
+    step: 15
+    minTime: '7:00'
+  }
+  $('.datetimepicker').click () ->
+    $(this).blur()
   $('#top .task li a').click () ->
     confirm "このタスクを完了にするわよ"
   $('img.comingsoon').click () ->
